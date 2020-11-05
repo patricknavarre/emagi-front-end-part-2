@@ -1,15 +1,14 @@
 const emojis = require('./emojis.js');
 
 
-// string-building version
-const encodeWord = function(word) {
+// string-building version - boolean version - 
+const encodeWordAlt = function(word) {
     let result = '';
     let found = false;
     for (const char of word) {
         found = false;
         for (const emoji of emojis) {
             if (emoji.letter === char.toLowerCase()) {
-                
                 result += emoji.symbol;
                 found = true;
             }
@@ -19,6 +18,23 @@ const encodeWord = function(word) {
         }
     }
     return result;
+}
+
+// -  as a map
+const encodeWord = function(word) {
+    const letters = word.split('');
+    const symbols = letters.map(function(char) {
+        for (const emoji of emojis) {
+            if (emoji.letter === char.toLowerCase()) {
+                return emoji.symbol;
+            }
+        }
+        return char;
+    });
+
+    
+    
+return symbols.join('')
 }
 
 
